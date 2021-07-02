@@ -5,7 +5,7 @@ import java.util.PriorityQueue;
 public class AppointmentManager extends PriorityQueue<Appointment> implements ServiceManager<Appointment> {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
 

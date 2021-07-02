@@ -8,7 +8,7 @@ import java.util.Properties;
 public class Utils {
 
 	private String dbms;
-	private String dbName; 
+	private String dbName;
 	private String userName;
 	private String password;
 
@@ -67,7 +67,7 @@ public class Utils {
 	public static void handleSQLException(SQLException e) {
 		for (Throwable throwable : e) {
 			if (throwable instanceof SQLException) {
-				if (ignoreSQLException(((SQLException)throwable).getSQLState()) == false) {
+				if (!ignoreSQLException(((SQLException)throwable).getSQLState())) {
 					throwable.printStackTrace(System.err);
 					System.err.println("SQLState: " + ((SQLException)throwable).getSQLState());
 					System.err.println("Error Code: " + ((SQLException)throwable).getErrorCode());
@@ -88,10 +88,8 @@ public class Utils {
 			return false;
 		}
 		// X0Y32: Jar file already exists in schema
-		if (sqlState.equalsIgnoreCase("X0Y32"))
-			return true;
 		// 42Y55: Table already exists in schema
-		if (sqlState.equalsIgnoreCase("42Y55"))
+		if (sqlState.equalsIgnoreCase("X0Y32") || sqlState.equalsIgnoreCase("42Y55"))
 			return true;
 		return false;
 	}
@@ -105,7 +103,7 @@ public class Utils {
 			}
 		} catch (SQLException e) {
 			handleSQLException(e);
-		}	
+		}
 	}
 
 }

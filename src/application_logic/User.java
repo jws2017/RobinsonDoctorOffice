@@ -27,33 +27,33 @@ public class User implements Node<Appointment> {
 	}
 
 	public void scheduleAppointment(ServiceManager<Appointment> manager, Date requestedTime) {
-		
+
 		/* TODO implement according to the description below:
 		 * The idea is that a User object will send a Request to a ServiceManager object
 		 * (in this case, the request would be to create a new appointment)
 		 * the ServiceManager object will, upon receiving the request, execute it on behalf of the User object
 		 * (in this case, a new appointment would be created)
 		 */
-		
+
 		// the createAppointmentRequest is, essentially, the message that will be sent to the manager
 		// so that the manager can create the new appointment
 		// so the request will likely need to contain the requestedTime of the appointment somehow
-		
-		Appointment createAppointmentRequest = Appointment.constructRequest(this, requestedTime); 
-		
+
+		Appointment createAppointmentRequest = Appointment.constructRequest(this, requestedTime);
+
 		sendRequest(manager, createAppointmentRequest, RequestType.CREATE);
-	
+
 	}
 
 	public void cancelAppointment(ServiceManager<Appointment> manager, Appointment toBeCancelled) {
-		
+
 		/* same deal as above
 		 * User sends a Request to a ServiceManager to handle the cancellation of the appointment
 		 * */
 		 // TODO fix according to description
-		
+
 		sendRequest(manager, toBeCancelled, RequestType.DELETE);
-	
+
 	}
 
 	// I'm wondering if this should be a UI function
@@ -65,7 +65,7 @@ public class User implements Node<Appointment> {
 	 */
 	public void setDoctorAvailablilty(User doctor) {
 		if (true) { //set some authorization
-			// TODO 
+			// TODO
 		}
 	}
 
@@ -83,7 +83,7 @@ public class User implements Node<Appointment> {
 
 	// only a user with the DOCTOR role can generate referrals
 	public void generateReferral() {
-		
+
 	}
 
 	@Override

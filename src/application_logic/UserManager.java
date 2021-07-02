@@ -27,7 +27,7 @@ public class UserManager implements ServiceManager<User> {
 	public User login(LoginData loginInfo) {
 		String[] logindata = loginInfo.toStrings();
 		String username = logindata[0], password = logindata[1];
-		
+
 		String dbRole = database.login(username, password);
 		Role role = new Role(RoleType.valueOf(dbRole), 0);
 		return new User(role);

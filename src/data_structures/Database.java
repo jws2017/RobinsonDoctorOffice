@@ -1,60 +1,26 @@
 package data_structures;
 
-import java.sql.SQLException;
+public class Database {
 
-public class Database extends java.util.ArrayList<Table> {
-
-	private static final long serialVersionUID = 1L;
 	private UsersTable users;
 
-	public static void main(String[] args) {
+	public static void connect() {
 
-		Utils utils = new Utils("derby", "testdb", "jjLOL", "jjLOL");
-		java.sql.Connection connection = null;
-		
 		try {
-			connection = utils.getConnection();
-		} catch (java.sql.SQLException e) {
-			Utils.handleSQLException(e);
-			return;
-		}
-		
-		Table[] tables = null;
-		
-		assert(connection != null);
-		
-		if (connection != null) {
-			try {
-				tables = utils.initializeTables(connection, "testdb", "derby");
-			} catch (SQLException e) {
-				Utils.handleSQLException(e);
-				e.printStackTrace();
-				return;
-			}
-		}
-		
-		Database database = new Database();
-		
-		assert(tables != null);
-		
-		if (tables != null) {
-			for (int i = 0; i < tables.length; i++) {
-				Table table = tables[i];
-				database.add(table);
-				if (table.getClass() == UsersTable.class) {
-					database.users = (UsersTable) table;
-				}
-			}
-		}
-		
-		assert(database.users != null);
-		
-		if (database.users != null) {
-			database.registerNewUser("JohnMarcus", "DOCTOR");
-			String role = database.getRole("JohnMarcus");
-			System.out.println(role);
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 
+		try {
+			java.sql.Connection con = java.sql.DriverManager.getConnection("jdbc:mysql://localhost:3306/sakila?user=jws20&password=MSacctp33d");
+			con.close();
+			System.out.println("Connection successful");
+		} catch (java.sql.SQLException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
 	}
 
 	// calls to users

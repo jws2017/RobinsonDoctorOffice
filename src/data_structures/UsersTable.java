@@ -53,7 +53,7 @@ public class UsersTable implements Table {
 	}
 
 	public boolean checkLogins(String[] strings) {
-		
+
 		try (Statement stmt = con.createStatement()) {
 			ResultSet results = stmt.executeQuery("SELECT * FROM USERS WHERE USERNAME=" + strings[0] + "AND PASSWORD=" + strings[1]);
 			return results.next();
@@ -67,7 +67,7 @@ public class UsersTable implements Table {
 
 		try (Statement stmt = con.createStatement()) {
 			ResultSet userRole = stmt.executeQuery("SELECT ROLE FROM USERS WHERE USERNAME=" + username);
-			
+
 			String role = "";
 
 			while(userRole.next()) {
@@ -75,7 +75,7 @@ public class UsersTable implements Table {
 			}
 
 			return role;
-			
+
 		} catch (SQLException e) {
 			Utils.handleSQLException(e);
 			return "";
